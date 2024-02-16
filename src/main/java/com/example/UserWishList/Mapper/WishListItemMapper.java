@@ -5,13 +5,14 @@ import com.example.UserWishList.models.WishListItem;
 
 public class WishListItemMapper {
     public static WishListItemDto wishListIntemToWishListItemDto(WishListItem wishListItem,WishListItemDto wishListItemDto){
+        wishListItemDto.setWishListItemId(wishListItem.getId());
         wishListItemDto.setNote(wishListItem.getNote());
         wishListItemDto.setTag(wishListItem.getTag());
         wishListItemDto.setProductId(wishListItem.getProductId());
         return wishListItemDto;
     }
 
-    public static WishListItem wishListItemStoToWishListItem(WishListItemDto wishListItemDto,WishListItem wishListItem){
+    public static WishListItem wishListItemDtoToWishListItem(WishListItemDto wishListItemDto, WishListItem wishListItem){
         wishListItem.setNote(wishListItemDto.getNote());
         wishListItem.setTag(wishListItemDto.getTag());
         wishListItem.setProductId(wishListItemDto.getProductId());
