@@ -23,7 +23,7 @@ import java.util.List;
 
 @Tag(
         name = "CRD API's for WishListItems",
-        description = "CRD REST API's in UserWishList to Create, Read and delete WishList Items "
+        description = "CRD REST API's in UserWishList to Create, Read and delete WishList Items Authentication is required "
 )
 @SecurityRequirement(name = "javainuseapi")
 @RestController

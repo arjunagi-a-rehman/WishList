@@ -1,0 +1,15 @@
+services:
+  userWishList:
+    image: "abdul12527/userwishlist:v1"
+    container_name: user_wish_list
+    ports:
+      - 8080:8080
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+
+    environment:
+      - MYSQL_URL=my sql url
+      - USER_NAME=username
+      - PASSWORD=password

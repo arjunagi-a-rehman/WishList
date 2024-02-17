@@ -31,7 +31,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         //   return http.authorizeHttpRequests(auth->auth.requestMatchers("/rooms").hasRole("ADMIN").requestMatchers("/").authenticated()).formLogin(Customizer.withDefaults()).csrf(AbstractHttpConfigurer::disable).build()
         return http.authorizeHttpRequests(auth->auth.
-                requestMatchers("/api/vo/user/register","/swagger-ui/**","/swagger-ui.html" ,"/javainuse-openapi/**").permitAll().requestMatchers("/api/vo/user/**").hasRole("ADMIN").requestMatchers("/api/vo/wishListItem/**").authenticated()).formLogin(Customizer.withDefaults()).csrf(AbstractHttpConfigurer::disable).build();
+                requestMatchers("/","/api/vo/user/register","/swagger-ui/**","/swagger-ui.html" ,"/javainuse-openapi/**").permitAll().requestMatchers("/api/vo/user/**").hasRole("ADMIN").requestMatchers("/api/vo/wishListItem/**").authenticated()).formLogin(Customizer.withDefaults()).csrf(AbstractHttpConfigurer::disable).build();
     }
     @Bean
     public PasswordEncoder passwordEncoder(){

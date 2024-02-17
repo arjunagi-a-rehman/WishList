@@ -23,7 +23,7 @@ import java.util.List;
 
 @Tag(
         name = "CURD API's for User",
-        description = "CURD REST API's in Users to Create,Update, Read and delete Users "
+        description = "CURD REST API's in Users to Create,Update, Read and delete Users here only user/register is open to all else other apis required admin role "
 )
 @SecurityRequirement(name = "javainuseapi")
 @RestController

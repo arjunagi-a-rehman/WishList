@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @OpenAPIDefinition(
 		info = @Info(
 				title = "User WishList Service",
-				description = "This service provides the user to add, remove and read the items from wish list also this is fully secured service ",
+				description = "This service provides the user to add, remove and read the items from wish list also this is fully secured service /n note: only user/register is open for all else authentication is required to get authenticated please go to /login and enter your credentials",
 				version = "v1",
 				contact = @Contact(
 						name = "Arjunagi A Rehman",

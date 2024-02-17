@@ -35,5 +35,10 @@ public class UserDto {
             example = "Love1@Wildlings"
     )
     private String password;
+    @Schema(
+            description = "This is a user Role their can only be 2 roles 1. ROLE_USER,ROLE_ADMIN",
+            example = "ROLE_USER"
+    )
+    @Pattern(regexp = "ROLE_USER|ROLE_ADMIN", message = "Role must be either ROLE_USER or ROLE_ADMIN")
     private String role;
 }
