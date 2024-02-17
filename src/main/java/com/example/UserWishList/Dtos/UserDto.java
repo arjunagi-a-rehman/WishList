@@ -1,5 +1,6 @@
 package com.example.UserWishList.Dtos;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -10,13 +11,30 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(
+        name = "User",
+        defaultValue = "This schema holds the User data"
+)
 public class UserDto {
     private Integer id;
-    @NotEmpty
+    @NotEmpty(message = "user must have some name")
+    @Schema(
+            description = "users name",
+            example = "Jon Targaryen"
+    )
     private String name;
-    @Email
+    @Email(message = "their must be proper email")
+    @Schema(
+            description = "users email",
+            example = "jon123@crow.com"
+    )
     private String email;
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*]).{8,}$\n")
+
+    @Schema(
+            description = "users Password Their must be 1 Upper case,1 Lower case, 1 special char, 1 number and total length must be >=8",
+            example = "Love1@Wildlings"
+    )
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*]).{8,}$\n",message = "please enter strong password")
     private String password;
     private String role;
 }
