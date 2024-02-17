@@ -8,6 +8,7 @@ import com.example.UserWishList.models.Users;
 import com.example.UserWishList.repository.UserRepo;
 import com.example.UserWishList.services.IUserServices;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +17,15 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Service
 public class DefaultUserServices implements IUserServices {
+    private PasswordEncoder passwordEncoder;
     private UserRepo userRepo;
     @Override
     public UserDto createUser(UserDto userDto) {
         if(userRepo.findByEmail(userDto.getEmail()).isPresent()) // if User already exist with provided email then throw exception
             throw new UserAlreadyExistsException("user Already exist with email: "+userDto.getEmail());
         Users user= UserMapper.UserDtoToUsers(userDto,new Users());
-        user=userRepo.save(user); // Don't Want to provide id to the user for security purposes
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user=userRepo.save(user);
         return UserMapper.UsersToUserDto(user,new UserDto());
     }
 
@@ -34,8 +37,8 @@ public class DefaultUserServices implements IUserServices {
     }
 
     @Override
-    public UserDto getUserByEmail(String email) {
-        return UserMapper.UsersToUserDto(userRepo.findByEmail(email).orElseThrow(()->new ResourceNotFoundException("no user Found ","email",email)),new UserDto());
+    public Users getUserByEmail(String email) {
+        return userRepo.findByEmail(email).orElseThrow(()->new ResourceNotFoundException("no user Found ","email",email));
     }
 
     @Override

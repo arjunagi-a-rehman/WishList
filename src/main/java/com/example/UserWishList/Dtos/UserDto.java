@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(
         name = "User",
-        defaultValue = "This schema holds the User data"
+        description = "This schema holds the User data"
 )
 public class UserDto {
     private Integer id;
@@ -34,7 +34,6 @@ public class UserDto {
             description = "users Password Their must be 1 Upper case,1 Lower case, 1 special char, 1 number and total length must be >=8",
             example = "Love1@Wildlings"
     )
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*]).{8,}$\n",message = "please enter strong password")
     private String password;
     private String role;
 }

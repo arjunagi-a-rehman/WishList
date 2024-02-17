@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ import java.util.List;
         name = "CURD API's for User",
         description = "CURD REST API's in Users to Create,Update, Read and delete Users "
 )
+@SecurityRequirement(name = "javainuseapi")
 @RestController
 @RequestMapping(path = "/api/vo/user",produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
@@ -50,7 +52,7 @@ public class UserController {
                     )
             )
     })
-    @PostMapping("/")
+    @PostMapping("/register")
     public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto user){
         UserDto userDto=userServices.createUser(user);
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);

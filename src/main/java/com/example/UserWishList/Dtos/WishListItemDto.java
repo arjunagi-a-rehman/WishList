@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(
         name = "WishListItem",
-        defaultValue = "This schema holds the WishListItem data"
+        description = "This schema holds the WishListItem data"
 )
 public class WishListItemDto {
     private Integer wishListItemId;

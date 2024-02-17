@@ -15,13 +15,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
+
+import java.security.Principal;
 import java.util.List;
 
 @Tag(
         name = "CRD API's for WishListItems",
         description = "CRD REST API's in UserWishList to Create, Read and delete WishList Items "
 )
+@SecurityRequirement(name = "javainuseapi")
 @RestController
 @AllArgsConstructor
 @RequestMapping(path = "/api/vo/wishListItem",produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -49,8 +53,8 @@ public class WishListItemController {
             )
     })
     @PostMapping("/")
-    private ResponseEntity<WishListItemDto> createWishList(@RequestBody WishListItemDto wishListItemDto){
-        WishListItemDto wishListItemDto1=wishListItemServices.createWishListItem(wishListItemDto);
+    private ResponseEntity<WishListItemDto> createWishList(@RequestBody WishListItemDto wishListItemDto,Principal principal){
+        WishListItemDto wishListItemDto1=wishListItemServices.createWishListItem(wishListItemDto,principal.getName());
         return new ResponseEntity<>(wishListItemDto, HttpStatus.CREATED);
     }
 //-----------------------------------------------------------------------------------------------------------
@@ -74,8 +78,9 @@ public class WishListItemController {
     }
     )
     @GetMapping("/user")
-    private ResponseEntity<List<WishListItemDto>> getAllWishListForUser(){
-        List<WishListItemDto> wishList=wishListItemServices.getAllWishListItemsForUser(null);
+    private ResponseEntity<List<WishListItemDto>> getAllWishListForUser(Principal principal){
+        System.out.println(principal.toString());
+        List<WishListItemDto> wishList=wishListItemServices.getAllWishListItemsForUser(principal.getName());
         return ResponseEntity.ok(wishList);
     }
 
