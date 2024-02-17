@@ -3,6 +3,7 @@ package com.example.UserWishList.controller;
 import com.example.UserWishList.Dtos.ResponseDto;
 import com.example.UserWishList.Dtos.UserDto;
 import com.example.UserWishList.services.IUserServices;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,7 +18,7 @@ import java.util.List;
 public class UserController {
     private IUserServices userServices;
     @PostMapping("/")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user){
+    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto user){
         UserDto userDto=userServices.createUser(user);
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<ResponseDto> updateUser(@RequestBody UserDto userDto){
+    public ResponseEntity<ResponseDto> updateUser(@RequestBody @Valid UserDto userDto){
         boolean isUpdated= userServices.updateUser(userDto);
         if(!isUpdated){
             return new ResponseEntity<>(new ResponseDto("500","something went wrong please try later"),HttpStatus.INTERNAL_SERVER_ERROR);
