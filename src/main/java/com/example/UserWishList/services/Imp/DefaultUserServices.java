@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 public class DefaultUserServices implements IUserServices {
     private UserRepo userRepo;
     @Override
-    public String createUser(UserDto userDto) {
+    public UserDto createUser(UserDto userDto) {
         if(userRepo.findByEmail(userDto.getEmail()).isPresent()) // if User already exist with provided email then throw exception
             throw new UserAlreadyExistsException("user Already exist with email: "+userDto.getEmail());
         Users user= UserMapper.UserDtoToUsers(userDto,new Users());
-        userRepo.save(user); // Don't Want to provide id to the user for security purposes
-        return "Created the user";
+        user=userRepo.save(user); // Don't Want to provide id to the user for security purposes
+        return UserMapper.UsersToUserDto(user,new UserDto());
     }
 
     @Override
@@ -39,17 +39,22 @@ public class DefaultUserServices implements IUserServices {
     }
 
     @Override
+    public UserDto getUserById(Integer id) {
+        return UserMapper.UsersToUserDto(userRepo.findById(id).orElseThrow(()->new ResourceNotFoundException("no user found with","id",id+"")),new UserDto());
+    }
+
+    @Override
     public Boolean updateUser(UserDto userDto) {
-        Users user=userRepo.findByEmail(userDto.getEmail()).orElseThrow(()->// Throw Exception if no user Found with provided email
-                new ResourceNotFoundException("no user found with ","email",userDto.getEmail()));
+        Users user=userRepo.findById(userDto.getId()).orElseThrow(()->// Throw Exception if no user Found with provided id
+                new ResourceNotFoundException("no user found with ","id",userDto.getId()+""));
         userRepo.save(UserMapper.UserDtoToUsers(userDto,user));
         return true;
     }
 
     @Override
-    public Boolean deleteUser(String email) {
-        Users user=userRepo.findByEmail(email).orElseThrow(()->
-                new ResourceNotFoundException("no user found with ","email",email));
+    public Boolean deleteUser(Integer id) {
+        Users user=userRepo.findById(id).orElseThrow(()->
+                new ResourceNotFoundException("no user found with ","id",id+""));
         userRepo.delete(user);
         return true;
     }

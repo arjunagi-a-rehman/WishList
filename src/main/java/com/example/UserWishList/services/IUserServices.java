@@ -6,9 +6,10 @@ import com.example.UserWishList.Dtos.UserDto;
 import java.util.List;
 
 public interface IUserServices {
-    String createUser(UserDto userDto);
+    UserDto createUser(UserDto userDto);
     List<UserDto> getAllUsers();
     UserDto getUserByEmail(String email);
+    UserDto getUserById(Integer id);
     Boolean updateUser(UserDto userDto);
-    Boolean deleteUser(String email);
+    Boolean deleteUser(Integer id);
 }
