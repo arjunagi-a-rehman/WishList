@@ -3,6 +3,7 @@
 This service provides functionalities to manage user wishlists. Users can add, remove, and read items from their wishlist. The service is fully secured, requiring authentication for all operations except for user registration, which is open to all users.
 
 **Deployed Link:** [User Wishlist Service](http://20.193.128.108/)
+**Demo Link**:[video demo](https://sus9.in/xeswps)
 ## Language and Framework
 ![Java](https://img.shields.io/badge/Language-Java-green)
 ![Spring Boot](https://img.shields.io/badge/Framework-Spring%20Boot-brightgreen)
