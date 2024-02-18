@@ -4,7 +4,7 @@ This service provides functionalities to manage user wishlists. Users can add, r
 
 **Deployed Link:** [User Wishlist Service](http://20.193.128.108/)
 
-**Demo Link**:[video demo](https://sus9.in/1rwqzdx)
+**Demo Link:**[video demo](https://sus9.in/xeswps)
 
 ### Assumtions:
 - Their is already a Product list or service with integer product id
