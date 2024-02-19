@@ -45,7 +45,6 @@ class DefaultUserServicesTest {
         when(userRepo.findByEmail(anyString())).thenReturn(Optional.empty());
         when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
 
-        // Creating a new Users object with populated fields
         Users savedUser = new Users();
         savedUser.setEmail(userDto.getEmail());
         savedUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
@@ -53,7 +52,6 @@ class DefaultUserServicesTest {
         // Mocking userRepo.save() to return the populated Users object
         when(userRepo.save(any(Users.class))).thenReturn(savedUser);
 
-        // Calling createUser method
         UserDto createdUser = userServices.createUser(userDto);
 
         // Assertions
@@ -75,7 +73,6 @@ class DefaultUserServicesTest {
 
         verify(userRepo, times(1)).findByEmail(anyString());
 
-        // Correcting verifyNoInteractions to verifyNoMoreInteractions
         verifyNoMoreInteractions(passwordEncoder);
         verifyNoMoreInteractions(userRepo); // Verifying no more interactions with userRepo
     }
@@ -173,7 +170,6 @@ class DefaultUserServicesTest {
 
         verify(userRepo, times(1)).findById(1);
 
-        // Correcting to verifyNoMoreInteractions
         verifyNoMoreInteractions(userRepo); // Verifying no more interactions with userRepo
     }
 
